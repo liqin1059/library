@@ -64,23 +64,23 @@ export default {
       }
     },
     async submitLogin() {
-      this.$router.push('/home');
-      // if (!this.$data.LoginForm.loginName && !this.$data.LoginForm.loginPsw) {
-      //   this.$data.usernameCheck = true;
-      //   this.$data.passwordCheck = true;
-      // } else if (!this.$data.LoginForm.loginName) {
-      //   this.$data.usernameCheck = true;
-      // } else if (!this.$data.LoginForm.loginPsw) {
-      //   this.$data.passwordCheck = true;
-      // } else {
-      //   this.$data.fullscreenLoading = true;
-      //   let resp = await this.$http.post('/ajaxLogin', { data: this.$data.LoginForm }, false);
-      //   this.$data.fullscreenLoading = false;
-      //   if (resp.success) {
-      //     // 设置token
-      //     this.$userLogin.setLoginInfo(resp.data.loginRespVo);
-      //   }
-      // }
+      if (!this.$data.LoginForm.loginName && !this.$data.LoginForm.loginPsw) {
+        this.$data.usernameCheck = true;
+        this.$data.passwordCheck = true;
+      } else if (!this.$data.LoginForm.loginName) {
+        this.$data.usernameCheck = true;
+      } else if (!this.$data.LoginForm.loginPsw) {
+        this.$data.passwordCheck = true;
+      } else {
+        this.$router.push('/home');
+        // this.$data.fullscreenLoading = true;
+        // let resp = await this.$http.post('/ajaxLogin', { data: this.$data.LoginForm }, false);
+        // this.$data.fullscreenLoading = false;
+        // if (resp.success) {
+        //   // 设置token
+        //   this.$userLogin.setLoginInfo(resp.data.loginRespVo);
+        // }
+      }
     }
   }
 };

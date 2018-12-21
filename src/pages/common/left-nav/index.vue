@@ -9,7 +9,7 @@
       text-color="#fff"
       active-text-color="#409EFF">
       <router-link v-for="(item, index) in menuData" :key="index" :to="item.url">
-        <el-menu-item :index="index">
+        <el-menu-item :index="index + ''">
           <i :class="item.icon"></i>
           <span slot="title">{{item.name}}</span>
         </el-menu-item>

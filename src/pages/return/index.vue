@@ -11,6 +11,7 @@
         <el-table-column prop="name" label="书籍名称"></el-table-column>
         <el-table-column prop="athour" label="书籍作者"></el-table-column>
         <el-table-column prop="borrowDate" label="借书日期"></el-table-column>
+        <el-table-column prop="fine" label="罚款"></el-table-column>
         <el-table-column label="操作" width="220px" fixed="right">
           <template slot-scope="scope">
             <el-button size="mini" type="primary" @click="deleteBooks(scope.$index, scope.row)" plain>归还</el-button>
