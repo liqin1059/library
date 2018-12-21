@@ -8,23 +8,11 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#409EFF">
-      <router-link to="/borrow">
-        <el-menu-item index="1">
-          <i class="el-icon-search"></i>
-          <span slot="title">查询书籍</span>
+      <router-link v-for="(item, index) in menuData" :key="index" :to="item.url">
+        <el-menu-item :index="index">
+          <i :class="item.icon"></i>
+          <span slot="title">{{item.name}}</span>
         </el-menu-item>
-      </router-link>
-      <router-link to="/return">
-      <el-menu-item index="2">
-        <i class="el-icon-refresh"></i>
-        <span slot="title">归还书籍</span>
-      </el-menu-item>
-      </router-link>
-      <router-link to="/books">
-      <el-menu-item index="3">
-        <i class="el-icon-tickets"></i>
-        <span slot="title">书籍管理</span>
-      </el-menu-item>
       </router-link>
     </el-menu>
   </div>
@@ -33,7 +21,25 @@
 export default {
   name: 'top-nav',
   data() {
-    return {};
+    return {
+      menuData: [
+        {
+          url: '/borrow',
+          name: '查询书籍',
+          icon: 'el-icon-search'
+        },
+        {
+          url: '/return',
+          name: '归还书籍',
+          icon: 'el-icon-refresh'
+        },
+        {
+          url: '/books',
+          name: '书籍管理',
+          icon: 'el-icon-tickets'
+        }
+      ]
+    };
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -47,6 +53,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .left-nav{
+  // border-right: 1px solid #545c64;
 }
 </style>
 
