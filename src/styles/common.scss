@@ -11,5 +11,21 @@
   margin-top: 10px;
 }
 .table-list{
-  text-align: center;
+  // text-align: center;
+}
+.table-content{
+  border-collapse: collapse;
+  line-height: 38px;
+  width: 100%;
+  font-size: 14px;
+  text-align: right;
+  td{
+    border:1px solid #DEDFE1;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+.table-header{
+  width: 140px;
+  text-align: left;
 }

@@ -20,7 +20,7 @@
         <el-table-column prop="borrowDate" label="借书日期"></el-table-column>
         <el-table-column label="操作" width="220px" fixed="right">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="deleteBooks(scope.$index, scope.row)" plain>借出</el-button>
+            <el-button size="mini" type="primary" @click="borrowConfirm(scope.$index, scope.row)" plain>借出</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -67,7 +67,6 @@ export default {
       },
       dataLoading: false,
       tableHeaderStyle: {
-        textAlign: 'center',
         fontWeight: 'bold',
         color: '#9BA4AE'
       },
@@ -77,12 +76,27 @@ export default {
     };
   },
   methods: {
-    resetForms() {
-
-    },
     getDataInit() {},
     deleteBooks() {
 
+    },
+    // 借出书籍
+    borrowConfirm(index, row) {
+      this.$confirm(`此操作将确认借出书籍《${row.name}》, 是否继续?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: `已成功借出书籍《${row.name}》`
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: `已取消借出书籍《${row.name}》`
+        });
+      });
     }
   }
 };

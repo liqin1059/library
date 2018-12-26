@@ -1,7 +1,10 @@
 <template>
   <header class="nav-top-header">
     <h1>书籍管理系统</h1>
-    <div class="user-name">用户名</div>
+    <div class="user-name">
+        <el-button size="mini" type="primary" slot="reference">用户名</el-button>
+        <el-button size="mini" type="primary" slot="reference" @click="loginOut">退出登录</el-button>
+    </div>
   </header>
 </template>
 <script>
@@ -9,6 +12,11 @@ export default {
   name: 'top-nav',
   data() {
     return {};
+  },
+  methods: {
+    loginOut() {
+      this.$router.push('/');
+    }
   }
 };
 </script>

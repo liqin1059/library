@@ -2,10 +2,10 @@
 <div class="borrow">
   <h1>书籍管理</h1>
   <el-card class="box-card operation-card">
-    <el-button icon="el-icon-plus" type="primary" size="mini">新增书籍</el-button>
+    <el-button icon="el-icon-plus" type="primary" size="mini" @click="addBooks">新增书籍</el-button>
     <!-- <el-form ref="form" :model="form" :inline="true" label-width="100px" size="mini">
-        <el-form-item label="结算机构简称" prop="orgId">
-          <el-select v-model="form.orgId" placeholder="请选择结算机构简称" :clearable="true">
+        <el-form-item label="新增书籍" prop="orgId">
+          <el-select v-model="form.orgId" placeholder="新增书籍" :clearable="true">
             <el-option v-for="(item, index) in orgTree" :key="index" :label="item.shortName" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
@@ -25,7 +25,7 @@
         <el-table-column prop="borrowDate" label="借书日期"></el-table-column>
         <el-table-column label="操作" width="220px" fixed="right">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="deleteBooks(scope.$index, scope.row)" plain>编辑</el-button>
+            <el-button size="mini" type="primary" @click="editBooks(scope.$index, scope.row)" plain>编辑</el-button>
             <el-button size="mini" type="danger" @click="deleteBooks(scope.$index, scope.row)" plain>删除</el-button>
           </template>
         </el-table-column>
@@ -41,30 +41,42 @@
        class="pages-number">
     </el-pagination>
   </el-card>
+  <book-edit :infor="infor" :title-value="titleValue" v-if="editShow" @okClick="editOkClick" @cancelClick="editShow = false"></book-edit>
 </div>
 </template>
 <script>
+import bookEdit from '@/pages/books/book-edit';
+
 export default {
   name: 'borrow',
+  components: {
+    'book-edit': bookEdit
+  },
   data() {
     return {
+      titleValue: null,
+      editShow: false,
+      infor: {},
       productList: [
         {
           number: 1245,
           name: '书11',
           athour: '书籍作者',
+          press: '机械工业出版社',
           borrowDate: '2018-02-02'
         },
         {
           number: 1245,
           name: '书11',
           athour: '书籍作者',
+          press: '机械工业出版社',
           borrowDate: '2018-02-02'
         },
         {
           number: 1245,
           name: '书11',
           athour: '书籍作者',
+          press: '机械工业出版社',
           borrowDate: '2018-02-02'
         }
       ],
@@ -73,7 +85,6 @@ export default {
       },
       dataLoading: false,
       tableHeaderStyle: {
-        textAlign: 'center',
         fontWeight: 'bold',
         color: '#9BA4AE'
       },
@@ -87,8 +98,39 @@ export default {
 
     },
     getDataInit() {},
-    deleteBooks() {
-
+    addBooks() {
+      this.$data.infor = {};
+      this.$data.editShow = true;
+      this.$data.titleValue = '新增';
+    },
+    editBooks(index, row) {
+      this.$data.infor = row;
+      this.$data.editShow = true;
+      this.$data.titleValue = '编辑';
+    },
+    editOkClick(data) {
+      this.$data.editShow = false;
+      this.$message({
+        type: 'success',
+        message: this.$data.titleValue === '编辑' ? `更新书籍《${data.name}》信息成功` : `新增书籍《${data.name}》成功`
+      });
+    },
+    deleteBooks(index, row) {
+      this.$confirm(`此操作将将书籍《${row.name}》从书库中移除, 是否继续?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: `已成功从书库中移除书籍《${row.name}》`
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: `已取消从书库中移除书籍《${row.name}》`
+        });
+      });
     }
   }
 };

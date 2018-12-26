@@ -1,7 +1,7 @@
 <template>
   <section class="login">      
     <div class="total_box">
-      <h1>登录</h1>
+      <h1>书籍管理系统</h1>
       <div class="form_box">
         <div class="form_input">
           <p class="form_holder" :class="{'p-active': nameClick || LoginForm.loginName}" @click="check('name')">账号</p>

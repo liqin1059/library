@@ -14,7 +14,7 @@
         <el-table-column prop="fine" label="罚款"></el-table-column>
         <el-table-column label="操作" width="220px" fixed="right">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="deleteBooks(scope.$index, scope.row)" plain>归还</el-button>
+            <el-button size="mini" type="primary" @click="returnConfirm(scope.$index, scope.row)" plain>归还</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -61,7 +61,7 @@ export default {
       },
       dataLoading: false,
       tableHeaderStyle: {
-        textAlign: 'center',
+        // textAlign: 'center',
         fontWeight: 'bold',
         color: '#9BA4AE'
       },
@@ -75,8 +75,23 @@ export default {
 
     },
     getDataInit() {},
-    deleteBooks() {
-
+    // 借出书籍
+    returnConfirm(index, row) {
+      this.$confirm(`此操作将确认归还书籍《${row.name}》, 是否继续?`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: `已成功归还书籍《${row.name}》`
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: `已取消归还书籍《${row.name}》`
+        });
+      });
     }
   }
 };
