@@ -19,6 +19,7 @@ export default new Router({
         { path: '/return', name: 'return', component: resolve => require(['@/pages/return'], resolve)},
         { path: '/books', name: 'books', component: resolve => require(['@/pages/books'], resolve)}
       ]
-    }
+    },
+    { path: '/login-register', name: 'login-register', component: resolve => require(['@/pages/login-register'], resolve)}
   ]
 });

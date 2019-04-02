@@ -14,15 +14,20 @@ import {
   MessageBox,
   Message
 } from 'element-ui';
-import UserLogin from '@/utils/UserLogin';
-Vue.prototype.$userLogin = UserLogin;
-import Http from '@/utils/HttpUtils';
-Vue.prototype.$http = new Http();
+
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;
 Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$prompt = MessageBox.prompt;
 Vue.prototype.$message = Message;
+Vue.prototype.$toastr = toastr;
+
+import UserLogin from '@/utils/UserLogin';
+Vue.prototype.$userLogin = UserLogin;
+import Http from '@/utils/HttpUtils';
+Vue.prototype.$http = new Http();
+import Config from '@/utils/Config';
+Vue.prototype.$config = Config;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

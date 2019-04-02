@@ -5,7 +5,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import Config from './Config';
 import MyRouter from '@/router';
-// import toastr from 'toastr';
+import toastr from 'toastr';
 // import { debug } from 'util';
 // 处理Raw纯json字符串得请求
 axios.defaults.baseURL = Config.HTTPBASEURL;
@@ -29,7 +29,7 @@ class Http {
     let _headers = {};
     if (isNeedLogin) {
       _headers = {
-        'token': '' + UserLogin.getLoginToken()
+        // 'token': '' + UserLogin.getLoginToken()
       };
     }
     let ajaxDataKey = method === 'post' ? 'data' : 'params';
@@ -52,7 +52,7 @@ class Http {
               redirect_url: 'home'
             }
           }
-        );this.$router.push('/system-manage/system-role');
+        );
         let data = res.data;
         data.success = false;
         return data;

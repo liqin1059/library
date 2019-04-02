@@ -1,7 +1,7 @@
 <template>
   <section class="login">      
     <div class="total_box">
-      <h1>书籍管理系统</h1>
+      <!-- <h1>书籍管理系统</h1> -->
       <div class="form_box">
         <div class="form_input">
           <p class="form_holder" :class="{'p-active': nameClick || LoginForm.loginName}" @click="check('name')">账号</p>
@@ -19,6 +19,10 @@
         <!-- <div class="remember">
           <el-checkbox v-model="LoginForm.rememberMe" size="mini">记住密码</el-checkbox>
         </div> -->
+        <div class="register-btns">
+          <el-button type="text" @click.native="loginRegister">忘记密码</el-button>
+          <el-button type="text" @click.native="loginRegister">注册账号</el-button>
+        </div>
       </div>
     </div>
   </section>
@@ -81,12 +85,19 @@ export default {
         //   this.$userLogin.setLoginInfo(resp.data.loginRespVo);
         // }
       }
+    },
+    loginRegister() {
+      this.$router.push('/login-register');
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.register-btns{
+  position: relative;
+  text-align: right;
+}
 .el-radio{
   margin: 10px;
 }
