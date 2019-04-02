@@ -37,6 +37,11 @@ export default {
           url: '/books',
           name: '书籍管理',
           icon: 'el-icon-tickets'
+        },
+        {
+          url: '/users',
+          name: '用户管理',
+          icon: 'el-icon-service'
         }
       ]
     };

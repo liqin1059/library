@@ -36,7 +36,7 @@ export default {
         name: this.$data.form.name,
         password: this.$data.form.password
       };
-      let resp = await this.$http.post('/create', postData);
+      let resp = await this.$http.post('/user/create', postData);
       if (resp.success) {
         this.$message({
           message: '注册成功',
