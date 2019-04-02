@@ -20,7 +20,7 @@
           <el-checkbox v-model="LoginForm.rememberMe" size="mini">记住密码</el-checkbox>
         </div> -->
         <div class="register-btns">
-          <el-button type="text" @click.native="loginRegister">忘记密码</el-button>
+          <!-- <el-button type="text" @click.native="loginRegister">忘记密码</el-button> -->
           <el-button type="text" @click.native="loginRegister">注册账号</el-button>
         </div>
       </div>
@@ -76,14 +76,18 @@ export default {
       } else if (!this.$data.LoginForm.loginPsw) {
         this.$data.passwordCheck = true;
       } else {
-        this.$router.push('/home');
-        // this.$data.fullscreenLoading = true;
-        // let resp = await this.$http.post('/ajaxLogin', { data: this.$data.LoginForm }, false);
-        // this.$data.fullscreenLoading = false;
-        // if (resp.success) {
-        //   // 设置token
-        //   this.$userLogin.setLoginInfo(resp.data.loginRespVo);
-        // }
+        this.$data.fullscreenLoading = true;
+        let postData = {
+          name: this.$data.LoginForm.loginName,
+          password: this.$data.LoginForm.loginPsw
+        };
+        let resp = await this.$http.post('/login', postData, false);
+        this.$data.fullscreenLoading = false;
+        if (resp.success) {
+          // 设置token
+          this.$userLogin.setLoginInfo(resp.data);
+          this.$router.push('/users');
+        }
       }
     },
     loginRegister() {

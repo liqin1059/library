@@ -16,12 +16,12 @@
     </el-form> -->
   </el-card>
     <el-card class="box-card table-card">
-      <el-table :data="productList" v-loading="dataLoading" :border="true" :stripe="true" 
+      <el-table :data="tableData" v-loading="loading" :border="true" :stripe="true" 
                 :header-cell-style="tableHeaderStyle" class="table-list" size="mini">
         <el-table-column prop="number" label="书籍编号"></el-table-column>
         <el-table-column prop="name" label="书籍名称"></el-table-column>
-        <el-table-column prop="athour" label="出版社"></el-table-column>
-        <el-table-column prop="athour" label="作者"></el-table-column>
+        <el-table-column prop="press" label="出版社"></el-table-column>
+        <el-table-column prop="author" label="作者"></el-table-column>
         <el-table-column prop="borrowDate" label="借书日期"></el-table-column>
         <el-table-column label="操作" width="220px" fixed="right">
           <template slot-scope="scope">
@@ -57,33 +57,11 @@ export default {
       titleValue: null,
       editShow: false,
       infor: {},
-      productList: [
-        {
-          number: 1245,
-          name: '书11',
-          athour: '书籍作者',
-          press: '机械工业出版社',
-          borrowDate: '2018-02-02'
-        },
-        {
-          number: 1245,
-          name: '书11',
-          athour: '书籍作者',
-          press: '机械工业出版社',
-          borrowDate: '2018-02-02'
-        },
-        {
-          number: 1245,
-          name: '书11',
-          athour: '书籍作者',
-          press: '机械工业出版社',
-          borrowDate: '2018-02-02'
-        }
-      ],
+      tableData: [],
       form: {
         orgId: null
       },
-      dataLoading: false,
+      loading: false,
       tableHeaderStyle: {
         fontWeight: 'bold',
         color: '#9BA4AE'
@@ -97,7 +75,14 @@ export default {
     resetForms() {
 
     },
-    getDataInit() {},
+    async getDataInit() {
+      this.$data.loading = true;
+      let resp = await this.$http.get('/books/list');
+      this.$data.loading = false;
+      if (resp.success) {
+        this.$data.tableData = resp.data;
+      }
+    },
     addBooks() {
       this.$data.infor = {};
       this.$data.editShow = true;
@@ -110,10 +95,7 @@ export default {
     },
     editOkClick(data) {
       this.$data.editShow = false;
-      this.$message({
-        type: 'success',
-        message: this.$data.titleValue === '编辑' ? `更新书籍《${data.name}》信息成功` : `新增书籍《${data.name}》成功`
-      });
+      this.getDataInit();
     },
     deleteBooks(index, row) {
       this.$confirm(`此操作将将书籍《${row.name}》从书库中移除, 是否继续?`, '提示', {
@@ -121,17 +103,29 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$message({
-          type: 'success',
-          message: `已成功从书库中移除书籍《${row.name}》`
-        });
+        this.deleteBooksHttp(row);
       }).catch(() => {
         this.$message({
           type: 'info',
           message: `已取消从书库中移除书籍《${row.name}》`
         });
       });
+    },
+    async deleteBooksHttp(row) {
+      this.$data.loading = true;
+      let resp = await this.$http.get('/books/delete', {id: row._id});
+      this.$data.loading = false;
+      if (resp.success) {
+        this.getDataInit();
+        this.$message({
+          type: 'success',
+          message: `已成功从书库中移除书籍《${row.name}》`
+        });
+      }
     }
+  },
+  mounted() {
+    this.getDataInit();
   }
 };
 </script>

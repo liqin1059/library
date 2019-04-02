@@ -10,7 +10,7 @@
       </el-form-item>
       <div>
         <el-button @click="back" size="mini">返回</el-button>
-        <el-button type="primary" @click="registerPost" size="mini">注册</el-button>
+        <el-button type="primary" @click="userUpdate" size="mini">确认</el-button>
       </div>
     </el-form>
   </el-card>
@@ -29,25 +29,35 @@ export default {
   },
   methods: {
     back() {
-      this.$router.push('./');
+      this.$router.push('/users');
     },
-    async registerPost() {
+    async userUpdate() {
       let postData = {
         name: this.$data.form.name,
-        password: this.$data.form.password
+        password: this.$data.form.password,
+        id: this.$route.query.id
       };
-      let resp = await this.$http.post('/user/create', postData);
+      let resp = await this.$http.post('/user/update', postData);
       if (resp.success) {
         this.$message({
           message: resp.desc,
           type: 'success'
         });
-        this.$router.push('./');
+        this.$router.push('/users');
+      }
+    },
+    async userInit() {
+      let getData = {
+        id: this.$route.query.id
+      };
+      let resp = await this.$http.get('/user/search', getData);
+      if (resp.success) {
+        this.$data.form = resp.data;
       }
     }
   },
   mounted() {
-
+    this.userInit();
   }
 }
 </script>

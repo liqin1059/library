@@ -17,10 +17,11 @@ export default new Router({
       children: [
         { path: '/borrow', name: 'borrow', component: resolve => require(['@/pages/borrow'], resolve)},
         { path: '/return', name: 'return', component: resolve => require(['@/pages/return'], resolve)},
-        { path: '/books', name: 'books', component: resolve => require(['@/pages/books'], resolve)}
+        { path: '/books', name: 'books', component: resolve => require(['@/pages/books'], resolve)},
+        { path: '/users', name: 'users', component: resolve => require(['@/pages/users'], resolve)},
+        { path: '/users-edit', name: 'users-edit', component: resolve => require(['@/pages/users/users-edit'], resolve)}
       ]
     },
-    { path: '/login-register', name: 'login-register', component: resolve => require(['@/pages/login-register'], resolve)},
-    { path: '/users', name: 'users', component: resolve => require(['@/pages/users'], resolve)}
+    { path: '/login-register', name: 'login-register', component: resolve => require(['@/pages/login-register'], resolve)}
   ]
 });

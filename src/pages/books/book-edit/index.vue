@@ -16,15 +16,15 @@
         </tr>
         <tr>
           <td class="table-header">作者：</td>
-          <td><el-input size="mini" v-model="form.athour" placeholder="请输入作者"></el-input></td>
+          <td><el-input size="mini" v-model="form.author" placeholder="请输入作者"></el-input></td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td class="table-header">借书日期：</td>
           <td>
             <el-date-picker size="mini" v-model="form.borrowDate" type="date" placeholder="选择日期" style="width:260px;">
           </el-date-picker>
           </td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
     <div slot="footer" class="dialog-footer">
@@ -43,9 +43,9 @@ export default {
       form: {
         number: null,
         name: null,
-        athour: null,
-        press: null,
-        borrowDate: null
+        author: null,
+        press: null
+        // borrowDate: null
       }
     };
   },
@@ -61,7 +61,8 @@ export default {
   },
   methods: {
     okClick() {
-      if (this.$data.form.number && this.$data.form.name && this.$data.form.athour && this.$data.form.press && this.$data.form.borrowDate) {
+      if (this.$data.form.number && this.$data.form.name && this.$data.form.author && this.$data.form.press) {
+        this.addBooksOk(this.$data.form);
         this.$emit('okClick', this.$data.form);
       } else {
         this.$message({
@@ -72,7 +73,18 @@ export default {
     },
     cancelClick() {
       this.$emit('cancelClick');
-    }
+    },
+    // 新增，修改书籍
+    async addBooksOk(data) {
+      let msg;
+      let resp = this.$http.post(this.titleValue === '新增' ? '/books/create' : '/books/update', data);
+      if (resp.success) {
+        this.$message({
+          type: 'success',
+          message: this.$data.titleValue === '编辑' ? `更新书籍《${data.name}》信息成功` : `新增书籍《${data.name}》成功`
+        });
+      }
+    },
   },
   mounted() {
     if (this.titleValue === '编辑') {
