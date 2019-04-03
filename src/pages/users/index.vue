@@ -37,7 +37,7 @@ export default {
       let resp = await this.$http.get('/user/list');
       this.$data.loading = false;
       if (resp.success) {
-        this.$data.tableData = resp.data;
+        this.$data.tableData = resp.data.dataList;
       }
     },
     async userEdit(row) {
