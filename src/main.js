@@ -15,6 +15,11 @@ import {
   Message
 } from 'element-ui';
 
+// 导入vue-echarts插件
+import ECharts from 'vue-echarts/components/ECharts';
+import 'echarts/lib/chart/line';
+Vue.component('chart', ECharts);
+
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;
 Vue.prototype.$confirm = MessageBox.confirm;

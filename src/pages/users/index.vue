@@ -2,16 +2,16 @@
 <div>
   <h1 class="title-h1">用户管理</h1>
   <el-card class="box-card table-card">
-      <!-- <el-button @click="addUser()" type="primary" plain size="mini">新增用户</el-button> -->
+      <el-button @click="addUser()" type="primary" size="mini" style="margin-bottom:20px;">新增用户</el-button>
       <el-table :data="tableData" :border="true" :stripe="true" 
                 :header-cell-style="tableHeaderStyle" class="table-list" size="mini">
       <el-table-column prop="name" label="用户名"></el-table-column>
       <el-table-column prop="password" label="密码"></el-table-column>
       <el-table-column prop="time" label="注册日期"></el-table-column>
-      <el-table-column fixed="right" label="操作">
+      <el-table-column fixed="right" label="操作" width="180px">
         <template slot-scope="scope">
           <el-button @click="userEdit(scope.row)" type="primary" plain size="mini">编辑</el-button>
-          <el-button @click="userDelete(scope.row)" type="warning" plain size="mini">删除</el-button>
+          <el-button @click="userDelete(scope.row)" type="danger" plain size="mini">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -60,6 +60,14 @@ export default {
         this.tableDataInit();
       }
     },
+    addUser() {
+      this.$router.push({
+        path: '/users-add',
+        query: {
+          button: '确认'
+        }
+      });
+    }
   },
   mounted() {
     this.tableDataInit();

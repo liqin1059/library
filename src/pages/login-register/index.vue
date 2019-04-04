@@ -10,7 +10,7 @@
       </el-form-item>
       <div>
         <el-button @click="back" size="mini">返回</el-button>
-        <el-button type="primary" @click="registerPost" size="mini">注册</el-button>
+        <el-button type="primary" @click="registerPost" size="mini">{{ button }}</el-button>
       </div>
     </el-form>
   </el-card>
@@ -24,12 +24,13 @@ export default {
       form: {
         name: null,
         password: null
-      }
+      },
+      button: '注册'
     };
   },
   methods: {
     back() {
-      this.$router.push('./');
+      this.$router.push(this.$route.query.button === '确认' ? '/users' : '/');
     },
     async registerPost() {
       let postData = {
@@ -42,12 +43,12 @@ export default {
           message: resp.desc,
           type: 'success'
         });
-        this.$router.push('./');
+        this.$router.push(this.$route.query.button === '确认' ? '/users' : '/');
       }
     }
   },
   mounted() {
-
+    this.$data.button = this.$route.query.button === '确认' ? this.$route.query.button : '注册';
   }
 }
 </script>

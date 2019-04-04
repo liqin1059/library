@@ -15,11 +15,13 @@ export default new Router({
     { path: '/', name: 'login', component: resolve => require(['@/pages/login'], resolve) },
     { path: '/home', name: 'home', component: resolve => require(['@/pages/home'], resolve),
       children: [
+        { path: '/dashboard', name: 'dashboard', component: resolve => require(['@/pages/dashboard'], resolve)},
         { path: '/borrow', name: 'borrow', component: resolve => require(['@/pages/borrow'], resolve)},
         { path: '/return', name: 'return', component: resolve => require(['@/pages/return'], resolve)},
         { path: '/books', name: 'books', component: resolve => require(['@/pages/books'], resolve)},
         { path: '/users', name: 'users', component: resolve => require(['@/pages/users'], resolve)},
-        { path: '/users-edit', name: 'users-edit', component: resolve => require(['@/pages/users/users-edit'], resolve)}
+        { path: '/users-edit', name: 'users-edit', component: resolve => require(['@/pages/users/users-edit'], resolve)},
+        { path: '/users-add', name: 'users-add', component: resolve => require(['@/pages/login-register'], resolve)}
       ]
     },
     { path: '/login-register', name: 'login-register', component: resolve => require(['@/pages/login-register'], resolve)}

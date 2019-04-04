@@ -5,11 +5,12 @@
       <el-button icon="el-icon-search" type="primary" size="mini">搜索书籍</el-button>
     </el-card> -->
       <el-card class="box-card table-card">
-        <el-table :data="productList" v-loading="dataLoading" :border="true" :stripe="true" 
+        <el-table :data="tableData" v-loading="loading" :border="true" :stripe="true" 
                   :header-cell-style="tableHeaderStyle" class="table-list" size="mini">
           <el-table-column prop="number" label="书籍编号"></el-table-column>
           <el-table-column prop="name" label="书籍名称"></el-table-column>
-          <el-table-column prop="athour" label="书籍作者"></el-table-column>
+          <el-table-column prop="author" label="书籍作者"></el-table-column>
+          <el-table-column prop="press" label="出版社"></el-table-column>
           <el-table-column prop="borrowDate" label="借书日期"></el-table-column>
           <el-table-column prop="fine" label="罚款"></el-table-column>
           <el-table-column label="操作" width="220px" fixed="right">
@@ -36,30 +37,11 @@ export default {
   name: 'borrow',
   data() {
     return {
-      productList: [
-        {
-          number: 1245,
-          name: '书11',
-          athour: '书籍作者',
-          borrowDate: '2018-02-02'
-        },
-        {
-          number: 1245,
-          name: '书11',
-          athour: '书籍作者',
-          borrowDate: '2018-02-02'
-        },
-        {
-          number: 1245,
-          name: '书11',
-          athour: '书籍作者',
-          borrowDate: '2018-02-02'
-        }
-      ],
+      tableData: [],
       form: {
         orgId: null
       },
-      dataLoading: false,
+      loading: false,
       tableHeaderStyle: {
         // textAlign: 'center',
         fontWeight: 'bold',
@@ -71,10 +53,14 @@ export default {
     };
   },
   methods: {
-    resetForms() {
-
+    async getDataInit() {
+      this.$data.loading = true;
+      let resp = await this.$http.get('/books/list');
+      this.$data.loading = false;
+      if (resp.success) {
+        this.$data.tableData = resp.data;
+      }
     },
-    getDataInit() {},
     // 借出书籍
     returnConfirm(index, row) {
       this.$confirm(`此操作将确认归还书籍《${row.name}》, 是否继续?`, '提示', {
@@ -93,6 +79,9 @@ export default {
         });
       });
     }
+  },
+  mounted() {
+    this.getDataInit();
   }
 };
 </script>

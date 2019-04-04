@@ -24,6 +24,11 @@ export default {
     return {
       menuData: [
         {
+          url: '/dashboard',
+          name: '统计',
+          icon: 'el-icon-menu'
+        },
+        {
           url: '/borrow',
           name: '查询书籍',
           icon: 'el-icon-search'
