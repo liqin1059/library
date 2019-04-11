@@ -47,10 +47,7 @@ class Http {
         toastr.error('session已经过期，请重新登录!', '错误提示：');
         MyRouter.push(
           {
-            name: 'login',
-            query: {
-              redirect_url: 'home'
-            }
+            name: 'login'
           }
         );
         let data = res.data;
