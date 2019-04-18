@@ -18,6 +18,20 @@
           <td class="table-header">作者：</td>
           <td><el-input size="mini" v-model="form.author" placeholder="请输入作者"></el-input></td>
         </tr>
+        <tr>
+          <td class="table-header">图片：</td>
+          <td style="text-align:left;">
+            <el-upload
+              class="upload-demo"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :on-preview="handlePreview"
+              :on-remove="handleRemove"
+              :file-list="fileList"
+              list-type="picture">
+              <el-button size="mini" type="primary" plain>点击上传</el-button>
+            </el-upload>
+          </td>
+        </tr>
         <!-- <tr>
           <td class="table-header">借书日期：</td>
           <td>
@@ -38,6 +52,7 @@ export default {
   name: 'book-edit',
   data() {
     return {
+      fileList: [],
       formLabelWidth: '120px',
       dialogFormVisible: true,
       form: {
@@ -60,6 +75,12 @@ export default {
     }
   },
   methods: {
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
     okClick() {
       if (this.$data.form.number && this.$data.form.name && this.$data.form.author && this.$data.form.press) {
         this.addBooksOk(this.$data.form);
