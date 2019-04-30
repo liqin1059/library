@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :title="`${titleValue}书籍信息`" :visible.sync="dialogFormVisible" center width="500px" @close="cancelClick">
+  <el-dialog :title="`${titleValue}书籍信息`" :visible.sync="dialogFormVisible" center width="40%" @close="cancelClick">
     <table class="table-content">
       <tbody>
         <tr>
