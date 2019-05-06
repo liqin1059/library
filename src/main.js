@@ -40,3 +40,27 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+// new Http().post('/stl/config/commons', {}, false).then(res => {
+//   let code = res.code.substr(res.code.length - 4);
+//   $('.page-loading').hide();
+//   if (code === '0000') {
+//     let data = res.data;
+//     let storeData = new Map();
+//     for ( var obj in data) {
+//       storeData[obj] = data[obj];
+//     }
+//   // data.map(item => {
+//   //   storeData.set(item.groupKey + '', item.items);
+//   // });
+//     store.dispatch('updateEnumSelectData', storeData);
+//     new Vue({
+//       el: '#app',
+//       router,
+//       store,
+//       components: { App },
+//       template: '<App/>'
+//     });
+//   } else {
+//     toastr.error(res.desc, '错误提示：');
+//   }
+// });
