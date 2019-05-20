@@ -1,30 +1,42 @@
 # library
 
 > 🖖🏠Library Management System
+图书管理系统
 
-## 🌸login-register🖖
+##  功能列表
 
-## 🌸login🖖
+  ###  用户注册 login-register
 
-## 🌸users🖖
+  ###  登录 login
 
-  # users-edit
+  ###  用户中心 users
 
-## 🌸common🖖
+    ####  用户信息修改 users-edit
+    ####  用户信息新增 users-add
+    ####  用户信息删除 users-delete
 
-  # common-left
+  ###  功能部分 common
 
-  # common-top
+    ####  左侧导航 common-left
 
-## 🌸books🖖
+    ####  顶部导航 common-top
 
-  # books-edit
+  ###  书籍查询 borrow
 
-## 🌸borrow🖖
+    #### 书籍借出 books-borrow
 
-## 🌸return🖖
+  ###  书籍归还 borrow
 
-## Build Setup
+    #### 书籍归还 books-return
+
+  ###  书籍管理 books
+
+    #### 书籍信息修改 books-edit
+    #### 书籍信息新增 books-add
+    #### 书籍信息删除 books-delete
+
+
+##  Build Setup
 
 ``` bash
 # install dependencies

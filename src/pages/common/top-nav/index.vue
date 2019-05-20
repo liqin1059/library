@@ -1,6 +1,6 @@
 <template>
   <header class="nav-top-header">
-    <!-- <h1>书籍管理系统</h1> -->
+    <h1>书籍管理系统</h1>
     <div class="user-name">
         <el-button size="mini" type="primary" slot="reference">{{ userInfor.name }}</el-button>
         <el-button size="mini" type="primary" slot="reference" @click="loginOut">退出登录</el-button>
