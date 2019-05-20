@@ -2,29 +2,30 @@
 
 > 🖖🏠Library Management System
 
-## 🌸login-register🌸🖖
+## 🌸login-register🖖
 
-## 🌸login🌸🖖
+## 🌸login🖖
 
-## 🌸users🌸🖖
+## 🌸users🖖
 
   # users-edit
 
-## 🌸common🌸🖖
+## 🌸common🖖
 
   # common-left
 
   # common-top
 
-## 🌸books🌸🖖
+## 🌸books🖖
 
   # books-edit
 
-## 🌸borrow🌸🖖
+## 🌸borrow🖖
 
-## 🌸return🌸🖖
+## 🌸return🖖
 
 ## Build Setup
+
 ``` bash
 # install dependencies
 npm install
@@ -39,4 +40,4 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+[https://github.com/liqin1059/library](https://github.com/liqin1059/library)
